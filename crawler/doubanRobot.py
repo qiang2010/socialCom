@@ -10,9 +10,10 @@ if __name__ == '__main__':
 	m_id = 0
 	p_id = 0
 	i_id = 0
-	flastlog = open('log/lastlog.log', 'r')
+	path = "E:/data/"   # 这里设置目录，需要手动创建 data和log目录
+	flastlog = open(path+'log/lastlog.log', 'r')
 	print 'recover last log...'
-	path = "E:/data/"
+	
 	
 	for line in flastlog:
 		if(len(line) < 3):
@@ -120,6 +121,10 @@ if __name__ == '__main__':
 
 				flog.write('%d/%d, %d, movie:%d/%d\n'%(count, lastPageIndex, c_num, movie_num, len(movieids)))
 				flastlog.write('%d,%d,%d\n'%(movie_num, count + 1, c_num))
+				#print "lastlog"
+				flastlog.flush()   # windows 下需要flush，否则在突然断掉不会写入文件
+				f.flush()
+				flog.flush()
 				c_num += 1
 			
 			
@@ -130,3 +135,4 @@ if __name__ == '__main__':
 		f.close()
 		flog.close()
 		flastlog.close()
+		
