@@ -3,17 +3,19 @@ from bs4 import BeautifulSoup
 import html5lib
 import urllib
 import urllib2
+import time
 import re
 import os
 from email import _name
-from com.mengdie import Comment
+import Comment
 if __name__ == '__main__':
     
-    movieids = ['25805741','6973376','24843198','11529526','10574468','10545939','25779218','24525283','4746257','24879820','25870084','5165819','1309163','20433139','25789352','10463953','24879858','25777330','3319755','6082518','24404677','24745500','11610281','4739952','2124724','1291832','1291548','4202982','1889243','4206507']
+    movieids = ['1889243']#['4206507'] 
     for movieid in movieids:
         lastPageIndex = 5000
        # path = os.path.normcase("E:/data/")
-        f = open(movieid + '.txt', 'w')
+        path = "E:/data/";
+        f = open(path+movieid + '.txt', 'w')
         count = 0
         while count < lastPageIndex:
             print '%d / %d'%(count,lastPageIndex)
@@ -50,6 +52,7 @@ if __name__ == '__main__':
             myComments = []
            
             for comment in comments:
+                time.sleep(1)
                 avatar = comment.find(name='div', attrs={'class':'avatar'})
                 top = avatar.find(name='a')
                 votes = comment.find(name='span', attrs={'class':'votes pr5'}).string
