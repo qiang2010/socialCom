@@ -12,6 +12,8 @@ if __name__ == '__main__':
 	i_id = 0
 	flastlog = open('log/lastlog.log', 'r')
 	print 'recover last log...'
+	path = "E:/data/"
+	
 	for line in flastlog:
 		if(len(line) < 3):
 			continue
@@ -21,7 +23,7 @@ if __name__ == '__main__':
 		i_id = int(pars[2])
 
 	print 'recover log: movie %d, page %d, item %d'%(m_id, p_id, i_id)
-	flastlog = open('log/lastlog.log', 'w')
+	flastlog = open(path+'log/lastlog.log', 'w')
 
 	movie_num = 0
 	for movieid in movieids:
@@ -30,13 +32,13 @@ if __name__ == '__main__':
 			continue
 
 		timestr = time.strftime('%Y%m%d_%H%M',time.localtime(time.time())) 
-		flog = open('log/' + timestr + '_Mid' + movieid + '.log','w')
+		flog = open(path+'log/' + timestr + '_Mid' + movieid + '.log','w')
 
 		lastPageIndex = 5000
 		if m_id == 0 and p_id == 0 and i_id == 0:							
-			f = open('data/' + movieid + '.txt', 'w')
+			f = open(path+'data/' + movieid + '.txt', 'w')
 		else:
-			f = open('data/' + movieid + '.txt', 'a')
+			f = open(path+'data/' + movieid + '.txt', 'a')
 	
 		count = 0
 		while count < lastPageIndex:
